@@ -158,7 +158,10 @@ async def claude_analysis(symbol: str, quote: dict, tech: dict) -> str:
         ) as resp:
             data = await resp.json()
 
-    return data["content"][0]["text"]
+    if "content" not in data:
+    raise Exception(f"Anthropic Error: {data}")
+return data["content"][0]["text"]
+
 
 
 # ══════════════════════════════════════════════
